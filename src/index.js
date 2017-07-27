@@ -3,6 +3,7 @@
 const log4js = require('log4js');
 const Logger = require("./logger");
 const LoggerLayout = require("./logger-layout");
+const LoggerLevel = require("./logger-level");
 const fs = require('fs');
 
 let initilized = false;
@@ -39,17 +40,21 @@ function getDefaultOptions() {
 }
 
 function configureLog4js(options) {
-  log4js.configure(options);
+  let defaultOptions = getDefaultOptions();
+  if (options && options.level) {
+    defaultOptions.levels["[all]"] = LoggerLevel.getLogLevel(options.level);
+  }
+  log4js.configure(defaultOptions);
   initilized = true;
 }
 
 module.exports = {
   configure: function(options) {
-    configureLog4js(options || getDefaultOptions());
+    configureLog4js(options);
   },
   getLogger: function(req, loggerName) {
     if (!initilized) {
-      configureLog4js(getDefaultOptions());
+      configureLog4js();
     }
 
     var logger = log4js.getLogger(loggerName);
