@@ -8,7 +8,7 @@ const fs = require('fs');
 let initilized = false;
 
 function getDefaultOptions() {
-  let LogFolder = "/logs/";
+  let LogFolder = "logs/";
   let LogFileName = `application.log`;
 
   let folderExists = fs.existsSync(LogFolder);
