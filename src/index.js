@@ -20,20 +20,24 @@ function getDefaultOptions() {
   let LogFile = `${LogFolder}${LogFileName}`;
 
   let options = {
-    "levels": {
-      "[all]": "INFO"
+    appenders: {
+      console: {
+        "type": "console",
+        "layout": LoggerLayout
+      },
+      file: {
+        "type": "dateFile",
+        "filename": LogFile,
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": false,
+        "compress": true,
+        "layout": LoggerLayout
+      }
     },
-    "appenders": [{
-      "type": "console",
-      "layout": LoggerLayout
-    }, {
-      "type": "dateFile",
-      "filename": LogFile,
-      "pattern": "-yyyy-MM-dd",
-      "alwaysIncludePattern": false,
-      "compress": true,
-      "layout": LoggerLayout
-    }]
+    categories: {
+      default: { appenders: ['console'], level: 'INFO' },
+      file: { appenders: ['file'], level: 'INFO' }
+    }
   };
 
   return options;
