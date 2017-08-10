@@ -7,7 +7,7 @@ function Logger(logger) {
   function log(req, level, ...args) {
     if (logger.isLevelEnabled(level)) {
       var loggerEvent = new LoggingEvent(logger.category, level, args[0], this, req);
-      logger.emit('log', loggerEvent);
+      logger.dispatch(loggerEvent);
     }
   }
 

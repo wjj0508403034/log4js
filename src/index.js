@@ -35,8 +35,8 @@ function getDefaultOptions() {
       }
     },
     categories: {
-      default: { appenders: ['console'], level: 'INFO' },
-      file: { appenders: ['file'], level: 'INFO' }
+      default: { appenders: ['console'], level: 'DEBUG' },
+      file: { appenders: ['file'], level: 'DEBUG' }
     }
   };
 
